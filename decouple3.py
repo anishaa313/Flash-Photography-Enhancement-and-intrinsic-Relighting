@@ -114,31 +114,30 @@ imagef = np.zeros((999, 781))
 imagef=cv2.normalize(blurf,  imagef, 0, 255, cv2.NORM_MINMAX)
 imagen = np.zeros((999, 781))
 imagen=cv2.normalize(blurn,  imagen, 0, 255, cv2.NORM_MINMAX)
-#xf=np.log10(x)
-#bff=np.log10(blurf)
-#xn=np.log10(y)
-#bfn=np.log10(blurn)
-#af=np.empty([row,col])
-#an=np.empty([row,col])
+xf=np.log10(x)
+bff=np.log10(blurf)
+xn=np.log10(y)
+bfn=np.log10(blurn)
+af=np.empty([row,col])
+an=np.empty([row,col])
+for i in range(row-1):
+    for j in range(col-1):
+        af[i][j]=xf[i][j]-bff[i][j]
+        an[i][j]=xn[i][j]-bfn[i][j]
+#blurf=cv2.bilateralFilter(x,10,30,30)
+#blurn=cv2.bilateralFilter(y,10,30,30)
+#blurf=im2double(blurf)
+#intensityf=im2double(intensityf)
+#detailf=np.empty([row,col])
 #for i in range(row-1):
 #    for j in range(col-1):
-#        af[i][j]=xf[i][j]-bff[i][j]
-#        an[i][j]=xn[i][j]-bfn[i][j]
-af=x/imagef
-an=y/imagen
-#combine1=np.empty([row,col])
-#for i in range(row-1):
-#    for j in range(col-1):
-#        combine1[i][j]=f[i][j]*af[i][j]
-combine1=af*blurn
-
-cv2.imshow('af',af)
-cv2.imshow('an',an)
+#detailf=intensityf-blurf
+#print(detailf.dtype)
+#cv2.imshow('detailf',detailf)
 cv2.imshow('blurf',blurf)
 cv2.imshow('blurn',blurn)
 cv2.imshow('t1',intensityf)
 cv2.imshow('t2',intensityn)
-cv2.imshow('combine1',combine1)
 #cv2.imshow('normf',imagef)
 #cv2.imshow('normn',imagen)
 cv2.imshow('f',f)
